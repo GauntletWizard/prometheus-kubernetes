@@ -1,14 +1,11 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: apps/v1beta1
+kind: StatefulSet
 metadata:
   name: prometheus-deployment
 spec:
-  replicas: 1
-  strategy:
-    rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 1
-    type: RollingUpdate
+  replicas: 2
+  podManagementPolicy: OrderedReady
+  serviceName: prometheus-svc
   selector:
     matchLabels:
       app: prometheus
@@ -63,21 +60,14 @@ spec:
       - name: rules-volume
         configMap:
           name: prometheus-rules
-      - name: etcd-tls-client-certs
-        secret:
-          secretName: etcd-tls-client-certs
         #hostPath:
         #  path: /etc/ssl/etcd/
-      - name: prometheus-data
-        emptyDir: {}
-      #- name: prometheus-data
-      #  rbd:
-      #    fsType: ext4
-      #    image: prometheus-data
-      #    keyring: /etc/ceph/keyring
-      #    monitors:
-      #    - ceph-mon.ceph.svc.cluster.local
-      #    pool: rbd
-      #    secretRef:
-      #      name: ceph-secret
-      #    user: admin
+  volumeClaimTemplates:
+  - metadata:
+      name: prometheus-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      # storageClassName: gp2
+      resources:
+        requests:
+          storage: 2000Gi
