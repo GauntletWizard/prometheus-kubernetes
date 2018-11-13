@@ -1,8 +1,8 @@
 {
     "apiVersion": "v1",
     "data": {
-        "storage-memory-chunks": "1048576",
-        "storage-retention": "360h"
+        "storage-retention": "360h",
+        "external-url": "https://prometheus.tcbtech.com"
     },
     "kind": "ConfigMap",
     "metadata": {

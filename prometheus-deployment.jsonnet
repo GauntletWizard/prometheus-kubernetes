@@ -26,7 +26,6 @@
                     {
                         "args": [
                             "-storage.local.retention=$(STORAGE_RETENTION)",
-                            "-storage.local.memory-chunks=$(STORAGE_MEMORY_CHUNKS)",
                             "-config.file=/etc/prometheus/prometheus.yml",
                             "-alertmanager.url=http://alertmanager:9093/alertmanager",
                             "-web.external-url=$(EXTERNAL_URL)"
@@ -36,8 +35,8 @@
                                 "name": "EXTERNAL_URL",
                                 "valueFrom": {
                                     "configMapKeyRef": {
-                                        "key": "url",
-                                        "name": "external-url"
+                                        "key": "external-url",
+                                        "name": "prometheus-env"
                                     }
                                 }
                             },
@@ -50,15 +49,6 @@
                                     }
                                 }
                             },
-                            {
-                                "name": "STORAGE_MEMORY_CHUNKS",
-                                "valueFrom": {
-                                    "configMapKeyRef": {
-                                        "key": "storage-memory-chunks",
-                                        "name": "prometheus-env"
-                                    }
-                                }
-                            }
                         ],
                         "image": "quay.io/coreos/prometheus:latest",
                         "name": "prometheus",
