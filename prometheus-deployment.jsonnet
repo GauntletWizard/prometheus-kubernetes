@@ -26,10 +26,9 @@
         containers: [
           {
             args: [
-              "-storage.local.retention=$(STORAGE_RETENTION)",
-              "-config.file=/etc/prometheus/prometheus.yml",
-              "-alertmanager.url=http://alertmanager:9093/alertmanager",
-              "-web.external-url=$(EXTERNAL_URL)",
+              "--config.file=/etc/prometheus/prometheus.yml",
+              "--storage.tsdb.retention.size=10GB",
+              "--web.external-url=$(EXTERNAL_URL)",
             ],
             env: [
               {
@@ -51,7 +50,7 @@
                 },
               },
             ],
-            image: "quay.io/coreos/prometheus:latest",
+            image: "prom/prometheus",
             name: "prometheus",
             ports: [
               {
@@ -69,7 +68,7 @@
                 name: "rules-volume",
               },
               {
-                mountPath: "/prometheus",
+                mountPath: "/data",
                 name: "prometheus-data",
               },
             ],
