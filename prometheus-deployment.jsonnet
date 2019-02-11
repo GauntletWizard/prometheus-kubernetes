@@ -14,6 +14,7 @@
     },
     serviceName: "prometheus",
     podManagementPolicy: "OrderedReady",
+    updateStrategy: { type: "RollingUpdate" },
     template: {
       metadata: {
         labels: {
