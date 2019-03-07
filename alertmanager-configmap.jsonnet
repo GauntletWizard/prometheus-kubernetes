@@ -3,7 +3,7 @@
     "kind": "ConfigMap",
     "metadata": {
         "name": "alertmanager",
-        "namespace": "default"
+        "namespace": "monitoring"
     },
     "data": {
         "config.yml": importstr "configmap/alertmanager.yaml"

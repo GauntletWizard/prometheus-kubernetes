@@ -3,7 +3,7 @@
     "kind": "Deployment",
     "metadata": {
         "name": "alertmanager",
-        "namespace": "default"
+        "namespace": "monitoring"
     },
     "spec": {
         "replicas": 1,

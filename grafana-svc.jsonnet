@@ -7,7 +7,7 @@
             "component": "core"
         },
         "name": "grafana",
-        "namespace": "default"
+        "namespace": "monitoring"
     },
     "spec": {
         "ports": [

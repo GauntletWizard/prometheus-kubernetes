@@ -6,6 +6,6 @@
     "kind": "ConfigMap",
     "metadata": {
         "name": "prometheus-configmap",
-        "namespace": "default"
+        "namespace": "monitoring"
     }
 }

@@ -3,7 +3,7 @@
   kind: "StatefulSet",
   metadata: {
     name: "prometheus-deployment",
-    namespace: "default",
+    namespace: "monitoring",
   },
   spec: {
     replicas: 2,

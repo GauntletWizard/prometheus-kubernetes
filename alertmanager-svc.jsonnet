@@ -10,7 +10,7 @@
             "name": "alertmanager"
         },
         "name": "alertmanager",
-        "namespace": "default"
+        "namespace": "monitoring"
     },
     "spec": {
         "ports": [

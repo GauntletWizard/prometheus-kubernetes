@@ -3,7 +3,7 @@
     "kind": "DaemonSet",
     "metadata": {
         "name": "node-exporter",
-        "namespace": "default"
+        "namespace": "monitoring"
     },
     "spec": {
         "template": {

@@ -10,7 +10,7 @@
             "name": "prometheus-svc"
         },
         "name": "prometheus-svc",
-        "namespace": "default"
+        "namespace": "monitoring"
     },
     "spec": {
         "ports": [
