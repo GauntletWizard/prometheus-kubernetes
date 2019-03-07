@@ -10,40 +10,6 @@ rule_files:
 
 # Scrape config for cluster components.
 scrape_configs:
-# etcd is living outside of our cluster and we configure
-# it directly.
-#- job_name: 'etcd'
-#  static_configs:
-#  - targets:
-#{% for host in groups['etcd'] %}
-#    - {{ hostvars[host]['ansible_' + etcd_interface].ipv4.address }}:{{ etcd_client_port }}
-#{% endfor %}
-#  tls_config:
-#    ca_file: /etc/etcd/ssl/ca.pem
-#    cert_file: /etc/etcd/ssl/client.pem
-#    key_file: /etc/etcd/ssl/client-key.pem
-#  scheme: https
-# Dynamic etcd rule, which helps to avoid ansible jinja2 templates
-# In order to make it work as expected it is necessary to add kubelet into all etcd nodes (and set them unschedulable if necessary)
-# Also you have to mount proper TLS keypairs in case when your etcd cluster is protected by TLS auth
-- job_name: 'etcd'
-  scheme: https
-  tls_config:
-    ca_file: /etc/etcd/ssl/ca.pem
-    cert_file: /etc/etcd/ssl/client.pem
-    key_file: /etc/etcd/ssl/client-key.pem
-  kubernetes_sd_configs:
-  - api_servers:
-    - https://kubernetes.default.svc
-    in_cluster: true
-    role: node
-  relabel_configs:
-  - action: labelmap
-    regex: __meta_kubernetes_node_label_(.+)
-  - source_labels: [__address__]
-    regex: '(.*):10250'
-    replacement: '${1}:2379'
-    target_label: __address__
 
 - job_name: 'kubernetes-cluster'
   # Default to scraping over https. If required, just disable this or change to

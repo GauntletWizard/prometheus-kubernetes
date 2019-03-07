@@ -68,11 +68,6 @@
                                 "name": "rules-volume"
                             },
                             {
-                                "mountPath": "/etc/etcd/ssl",
-                                "name": "etcd-tls-client-certs",
-                                "readOnly": true
-                            },
-                            {
                                 "mountPath": "/prometheus",
                                 "name": "prometheus-data"
                             }
