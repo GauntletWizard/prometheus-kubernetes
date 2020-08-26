@@ -70,4 +70,5 @@ spec:
       # storageClassName: gp2
       resources:
         requests:
-          storage: 2000Gi
+          # TEMPLATE: Pick a size
+          storage: 20Gi
