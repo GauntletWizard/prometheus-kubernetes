@@ -9,7 +9,7 @@ metadata:
   name: prometheus
 spec:
   selector:
-    app: prometheus
+    run: prometheus
   ports:
   - name: prometheus
     protocol: TCP

@@ -6,12 +6,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: alertmanager
+      run: alertmanager
   template:
     metadata:
       name: alertmanager
       labels:
-        app: alertmanager
+        run: alertmanager
     spec:
       containers:
       - name: alertmanager

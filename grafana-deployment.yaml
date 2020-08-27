@@ -3,14 +3,14 @@ kind: StatefulSet
 metadata:
   name: grafana
   labels:
-    app: grafana
+    run: grafana
     component: core
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: grafana
+        run: grafana
         component: core
     spec:
       containers:

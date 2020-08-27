@@ -6,7 +6,7 @@ spec:
   template:
     metadata:
       labels:
-        app: node-exporter
+        run: node-exporter
       name: node-exporter
     spec:
       containers:

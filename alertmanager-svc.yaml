@@ -9,7 +9,7 @@ metadata:
   name: alertmanager
 spec:
   selector:
-    app: alertmanager
+    run: alertmanager
   #type: NodePort
   ports:
   - name: alertmanager
