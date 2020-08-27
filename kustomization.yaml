@@ -1,0 +1,26 @@
+# Default namespace. Override with your own
+namespace: monitoring
+resources:
+  # Prometheus
+  - prometheus-sts.yaml
+  - prometheus-svc.yaml
+  - prometheus-env.yaml
+  - prometheus-configmap.yaml
+  # Alertmanager
+  - alertmanager-sts.yaml
+  - alertmanager-configmap.yaml
+  - alertmanager-svc.yaml
+  # Grafana
+  - grafana-sts.yaml
+  - grafana-svc.yaml
+  # Node Exporter
+  - node-exporter-ds.yaml
+  # TODO: kube-state-metrics
+configMapGenerator: 
+  - name: prometheus-rules
+    files: 
+      - prometheus-rules/load-average.rules
+  - name: alertmanager-templates
+    files:
+      - alertmanager-templates/default.tmpl
+      - alertmanager-templates/slack.tmpl
