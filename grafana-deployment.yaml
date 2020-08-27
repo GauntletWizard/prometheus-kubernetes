@@ -1,5 +1,5 @@
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: grafana
   labels:
@@ -14,7 +14,7 @@ spec:
         component: core
     spec:
       containers:
-        - image: grafana/grafana:3.1.1
+        - image: grafana/grafana
           name: grafana
           # env:
           resources:
@@ -81,8 +81,5 @@ spec:
           - name: config-volume
             mountPath: /opt/grafana-import-dashboards
       volumes:
-      - name: config-volume
-        configMap:
-          name: grafana-import-dashboards
       - name: grafana-persistent-storage
         emptyDir: {}

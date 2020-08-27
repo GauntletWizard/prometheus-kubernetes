@@ -4,13 +4,12 @@ metadata:
   annotations:
     prometheus.io/scrape: 'true'
   labels:
-    name: prometheus-svc # ! DO NOT USE prometheus as a name: https://github.com/kubernetes/kubernetes/issues/25573
+    name: prometheus
     kubernetes.io/name: "Prometheus"
-  name: prometheus-svc
+  name: prometheus
 spec:
   selector:
     app: prometheus
-  #type: NodePort
   ports:
   - name: prometheus
     protocol: TCP

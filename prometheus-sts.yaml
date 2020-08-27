@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: prometheus-deployment
+  name: prometheus
 spec:
   replicas: 2
   podManagementPolicy: OrderedReady
-  serviceName: prometheus-svc
+  serviceName: prometheus
   selector:
     matchLabels:
       app: prometheus
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: prometheus
-        image: quay.io/coreos/prometheus:latest
+        image: prom/prometheus:latest
         args:
           - '-storage.local.retention=$(STORAGE_RETENTION)'
           - '-storage.local.memory-chunks=$(STORAGE_MEMORY_CHUNKS)'
@@ -48,9 +48,6 @@ spec:
           mountPath: /etc/prometheus
         - name: rules-volume
           mountPath: /etc/prometheus-rules
-        - name: etcd-tls-client-certs
-          mountPath: /etc/etcd/ssl
-          readOnly: true
         - name: prometheus-data
           mountPath: /prometheus
       volumes:
