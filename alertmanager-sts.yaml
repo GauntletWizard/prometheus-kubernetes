@@ -24,6 +24,11 @@ spec:
         ports:
         - name: alertmanager
           containerPort: 9093
+        resources:
+          # TEMPLATE: Set resource limits
+          requests:
+            cpu: .1
+            memory: 50m
         env:
         - name: EXTERNAL_URL
           valueFrom:

@@ -27,6 +27,11 @@ spec:
         ports:
         - name: web
           containerPort: 9090
+        resources:
+          # TEMPLATE: Set resource limits
+          requests:
+            cpu: .1
+            memory: 500m
         env:
         - name: EXTERNAL_URL
           valueFrom:
