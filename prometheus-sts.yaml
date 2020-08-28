@@ -31,8 +31,8 @@ spec:
         - name: EXTERNAL_URL
           valueFrom:
             configMapKeyRef:
-              name: external-url
-              key: url
+              name: prometheus-env
+              key: external-url
         - name: STORAGE_RETENTION
           valueFrom:
             configMapKeyRef:
