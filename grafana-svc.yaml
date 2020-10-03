@@ -4,13 +4,11 @@ metadata:
   name: grafana
   labels:
     app: grafana
-    component: core
-  # annotations:
-  #   prometheus.io/scrape: 'true'
+  annotations:
+    prometheus.io/scrape: 'true'
 spec:
   selector:
-    app: grafana
-    component: core
+    run: grafana
   ports:
   - name: grafana
     protocol: TCP
