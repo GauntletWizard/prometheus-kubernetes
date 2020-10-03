@@ -66,6 +66,8 @@ spec:
           name: prometheus-rules
         #hostPath:
         #  path: /etc/ssl/etcd/
+      securityContext:
+        fsGroup: 1001
   volumeClaimTemplates:
   - metadata:
       name: prometheus-data
