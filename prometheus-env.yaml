@@ -5,4 +5,4 @@ metadata:
 data:
   storage-retention: 360h
   storage-memory-chunks: '1048576'
-  external-url: example.com
+  external-url: https://example.com
