@@ -43,7 +43,7 @@ spec:
             #   value: /api/v1/proxy/namespaces/kube-system/services/monitoring-grafana/
           volumeMounts:
           - name: grafana-persistent-storage
-            mountPath: /var
+            mountPath: /var/lib/grafana
       securityContext:
         fsGroup: 1001
       volumes:
