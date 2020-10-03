@@ -44,6 +44,8 @@ spec:
           volumeMounts:
           - name: grafana-persistent-storage
             mountPath: /var
+      securityContext:
+        fsGroup: 1001
       volumes:
       - name: grafana-persistent-storage
         emptyDir: {}
