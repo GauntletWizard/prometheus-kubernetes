@@ -68,6 +68,7 @@ spec:
         #  path: /etc/ssl/etcd/
       securityContext:
         fsGroup: 1001
+      serviceAccountName: prometheus
   volumeClaimTemplates:
   - metadata:
       name: prometheus-data

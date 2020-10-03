@@ -6,6 +6,7 @@ resources:
   - prometheus-svc.yaml
   - prometheus-env.yaml
   - prometheus-configmap.yaml
+  - prometheus-rbac.yaml
   # Alertmanager
   - alertmanager-sts.yaml
   - alertmanager-configmap.yaml
