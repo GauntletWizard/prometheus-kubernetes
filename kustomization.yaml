@@ -20,7 +20,7 @@ resources:
 configMapGenerator: 
   - name: prometheus-rules
     files: 
-      - prometheus-rules/load-average.rules
+      - prometheus-rules/load-average.rules.yml
   - name: alertmanager-templates
     files:
       - alertmanager-templates/default.tmpl

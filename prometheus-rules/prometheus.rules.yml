@@ -1,0 +1,3 @@
+groups:
+- name: prometheus.rules
+  rules: []
