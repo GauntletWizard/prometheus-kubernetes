@@ -42,10 +42,7 @@ data:
         cert_file: /etc/etcd/ssl/client.pem
         key_file: /etc/etcd/ssl/client-key.pem
       kubernetes_sd_configs:
-      - api_servers:
-        - https://kubernetes.default.svc
-        in_cluster: true
-        role: node
+      - role: node
       relabel_configs:
       - action: labelmap
         regex: __meta_kubernetes_node_label_(.+)
@@ -76,10 +73,7 @@ data:
       #bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
 
       kubernetes_sd_configs:
-      - api_servers:
-        - https://kubernetes.default.svc
-        in_cluster: true
-        role: node
+      - role: node
 
       relabel_configs:
       - action: labelmap
@@ -128,10 +122,7 @@ data:
       #bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
 
       kubernetes_sd_configs:
-      - api_servers:
-        - https://kubernetes.default.svc
-        in_cluster: true
-        role: node
+      - role: node
 
       relabel_configs:
       - action: labelmap
@@ -164,10 +155,7 @@ data:
         ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       kubernetes_sd_configs:
-      - api_servers:
-        - https://kubernetes.default.svc
-        in_cluster: true
-        role: node
+      - role: node
 
       relabel_configs:
       - action: labelmap
@@ -201,10 +189,7 @@ data:
     - job_name: 'kubernetes-service-endpoints'
 
       kubernetes_sd_configs:
-      - api_servers:
-        - 'https://kubernetes.default.svc'
-        in_cluster: true
-        role: endpoint
+      - role: endpoints
 
       relabel_configs:
       - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
@@ -245,10 +230,7 @@ data:
         module: [http_2xx]
 
       kubernetes_sd_configs:
-      - api_servers:
-        - 'https://kubernetes.default.svc'
-        in_cluster: true
-        role: service
+      - role: service
 
       relabel_configs:
       - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_probe]
@@ -278,10 +260,7 @@ data:
     - job_name: 'kubernetes-pods'
 
       kubernetes_sd_configs:
-      - api_servers:
-        - 'https://kubernetes.default.svc'
-        in_cluster: true
-        role: pod
+      - role: pod
 
       relabel_configs:
       - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
