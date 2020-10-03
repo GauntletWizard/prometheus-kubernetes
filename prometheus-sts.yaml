@@ -19,11 +19,13 @@ spec:
       - name: prometheus
         image: prom/prometheus:latest
         args:
-          - '--storage.local.retention=$(STORAGE_RETENTION)'
-          - '--storage.local.memory-chunks=$(STORAGE_MEMORY_CHUNKS)'
           - '--config.file=/etc/prometheus/prometheus.yml'
-          - '--alertmanager.url=http://alertmanager:9093/alertmanager'
           - '--web.external-url=$(EXTERNAL_URL)'
+          - --web.enable-lifecycle
+          - --storage.tsdb.retention.time=$(STORAGE_RETENTION)
+          # - --storage.tsdb.retention.size=$(STORAGE_RETENTION_SIZE)
+          - --storage.tsdb.wal-compression
+          - --storage.tsdb.path=/prometheus/data
         ports:
         - name: web
           containerPort: 9090
