@@ -39,7 +39,7 @@ Alertmanager provides a WebUI for managing alerts.
 Grafana has extensive configuration via WebUI and via Environment Variables. It is recommended to review it independently.
 The included configuration uses a single Grafana instance backed by a SQlite
 #### Backends:
-Grafana relies upon the Prometheus instances for high availability. The included configuration also uses a provisioned volume to store a configuration database
+Grafana relies upon the Prometheus instances for high availability. The included configuration also uses a provisioned volume to store a configuration database. For higher availability, you can switch it's storage backend to use Postgres, and run Grafana as a deployment instead. (https://grafana.com/docs/grafana/latest/administration/configuration/#database)
 #### Frontends:
 Grafana provides a WebUI, and can be the only part of this infrastructure exposed if you so wish
 
