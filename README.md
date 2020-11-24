@@ -59,6 +59,37 @@ Node Exporter provides a HTTP Interface that Prometheus scrapes. It does not sto
 ## Configuring and Using Prometheus
 
 ### Scraping your pods/targets
+You should familiarize yourself with Prometheus' [scrape config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) configuration. This version comes equipped with some basic scrape configurations, which should be sufficient to get you started.
+
+You can inform the Prometheus Service Discovery of pods you want to scrape in one of two ways: Either having them belong to a service which is scraped by Prometheus, or by annotating them individually. With the former, simply set up your service as your would for serving traffic with it, and add the `prometheus.io/scrape` annotation to it:
+```
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: hello-node
+  annotations:
+    prometheus.io/scrape: true
+```
+
+Alternatively, you can set the annotation directly on the pods themselves:
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: hello-node
+spec:
+  template:
+    metadata:
+      labels:
+        app: hello-node
+      annotations: 
+        prometheus.io/scrape: true
+```
+
+#### Advanced Usage
+For your most important or sensitive jobs, it may make sense to alter the prometheus.yml to directly include them as a job. This allows you to configure alternative ports for metrics monitoring, or bearer-tokens, passwords, or MTLS certificates used to authenticate to the pods to grab metrics. 
 
 ### Recording and Alerting
 
