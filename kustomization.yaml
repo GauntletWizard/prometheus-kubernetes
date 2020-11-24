@@ -5,7 +5,6 @@ resources:
   - prometheus-sts.yaml
   - prometheus-svc.yaml
   - prometheus-env.yaml
-  - prometheus-configmap.yaml
   - prometheus-rbac.yaml
   # Alertmanager
   - alertmanager-sts.yaml
@@ -19,6 +18,9 @@ resources:
   - ingress.yaml
   # TODO: kube-state-metrics
 configMapGenerator: 
+  - name: prometheus-configmap
+    files:
+      - prometheus.yml
   - name: prometheus-rules
     files: 
       - prometheus-rules/load-average.rules.yml
