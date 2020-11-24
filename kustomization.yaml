@@ -8,7 +8,6 @@ resources:
   - prometheus-rbac.yaml
   # Alertmanager
   - alertmanager-sts.yaml
-  - alertmanager-configmap.yaml
   - alertmanager-svc.yaml
   # Grafana
   - grafana-sts.yaml
@@ -24,6 +23,9 @@ configMapGenerator:
   - name: prometheus-configmap
     files:
       - prometheus.yml
+  - name: alertmanager
+    files:
+      - alertmanager.yml
   - name: prometheus-rules
     files: 
       - prometheus-rules/load-average.rules.yml
