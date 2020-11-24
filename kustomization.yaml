@@ -25,3 +25,5 @@ configMapGenerator:
     files:
       - alertmanager-templates/default.tmpl
       - alertmanager-templates/slack.tmpl
+generatorOptions:
+  disableNameSuffixHash: true
