@@ -16,7 +16,10 @@ resources:
   # Node Exporter
   - node-exporter-ds.yaml
   - ingress.yaml
-  # TODO: kube-state-metrics
+  # kube-state-metrics
+  - kube-state-metrics-deployment.yaml
+  - kube-state-metrics-rbac.yaml
+  - kube-state-metrics-service.yaml
 configMapGenerator: 
   - name: prometheus-configmap
     files:
