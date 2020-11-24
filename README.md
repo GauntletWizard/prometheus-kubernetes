@@ -62,7 +62,7 @@ Node Exporter provides a HTTP Interface that Prometheus scrapes. It does not sto
 ### Scraping your pods/targets
 You should familiarize yourself with Prometheus' [scrape config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) configuration. This version comes equipped with some basic scrape configurations, which should be sufficient to get you started.
 
-You can inform the Prometheus Service Discovery of pods you want to scrape in one of two ways: Either having them belong to a service which is scraped by Prometheus, or by annotating them individually. With the former, simply set up your service as your would for serving traffic with it, and add the `prometheus.io/scrape` annotation to it:
+You can inform the Prometheus Service Discovery of pods you want to scrape in one of two ways: Either having them belong to a service which is scraped by Prometheus, or by annotating them individually. With the former, simply set up your service as your would for serving traffic with it, and add the `prometheus.io/scrape` annotation to it. Prometheus will discover a target for each port in your service; If you have multiple ports, also set the `prometheus.io/port` annotation to inform Prometheus which port to scrape.
 ```
 apiVersion: v1
 kind: Service
@@ -73,7 +73,7 @@ metadata:
     prometheus.io/scrape: true
 ```
 
-Alternatively, you can set the annotation directly on the pods themselves:
+Alternatively, you can set the annotation directly on the pods themselves. The former is preferred, because it organizes your pods neatly into "jobs"
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -90,6 +90,14 @@ spec:
 ```
 
 #### Advanced Usage
+
+##### Pushgateway: Cronjobs, Jobs, Etc.
+[Pushgateway](https://github.com/prometheus/pushgateway) is a component of the Prometheus suite that allows workloads that do not run all the time (i.e. Jobs, or individual Pods) to push their gathered metrics for further storage. You should [approach the use of Pushgateway carefully](https://prometheus.io/docs/practices/pushing/). A cronjob that does database maintenance is a good use of Pushgateway. A Pod that is not managed by a Deployment, Daemonset or StatefulSet (i.e. one you schedule through your own automation and with restartPolicy != Always) is a good candidate for using Pushgateway. Customer Requests are not a good usage of Pushgateway
+
+##### Blackbox Monitoring
+[Blackbox Exporter](https://github.com/prometheus/blackbox_exporter) is a component of the Prometheus suite that tests connections. It can process HTTP requests as well as negotiate TLS connections. You should set up Blackbox Exporter to scrape your externally-facing services, to gater metrics such as TLS Certificate Expiration time.
+
+##### Additional scrape\_configs
 For your most important or sensitive jobs, it may make sense to alter the prometheus.yml to directly include them as a job. This allows you to configure alternative ports for metrics monitoring, or bearer-tokens, passwords, or MTLS certificates used to authenticate to the pods to grab metrics. 
 
 ### Recording and Alerting
