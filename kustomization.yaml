@@ -16,6 +16,7 @@ resources:
   - grafana-svc.yaml
   # Node Exporter
   - node-exporter-ds.yaml
+  - ingress.yaml
   # TODO: kube-state-metrics
 configMapGenerator: 
   - name: prometheus-rules
