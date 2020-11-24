@@ -81,6 +81,8 @@ scrape_configs:
 
 # Scrape config for service endpoints.
 #
+# Services that are set up to be scraped in this manner will be considered a "job".
+#
 # The relabeling allows the actual service scrape endpoint to be configured
 # via the following annotations:
 #
@@ -119,7 +121,7 @@ scrape_configs:
     target_label: kubernetes_namespace
   - source_labels: [__meta_kubernetes_service_name]
     action: replace
-    target_label: kubernetes_name
+    target_label: job
 
 # Example scrape config for probing services via the Blackbox Exporter.
 #
