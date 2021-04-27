@@ -39,9 +39,11 @@ Alertmanager provides a WebUI for managing alerts.
 Grafana has extensive configuration via WebUI and via Environment Variables. It is recommended to review it independently.
 The included configuration uses a single Grafana instance backed by a SQlite
 #### Backends:
-Grafana relies upon the Prometheus instances for high availability. The included configuration also uses a provisioned volume to store a configuration database. For higher availability, you can switch it's storage backend to use Postgres, and run Grafana as a deployment instead. (https://grafana.com/docs/grafana/latest/administration/configuration/#database)
+Grafana relies upon the Prometheus instances for storage, and their availability is the primary factor. The included configuration also uses a provisioned volume to store a configuration database. For higher availability, you can switch it's storage backend to use Postgres, and run Grafana as a deployment instead. (https://grafana.com/docs/grafana/latest/administration/configuration/#database).
 #### Frontends:
-Grafana provides a WebUI, and can be the only part of this infrastructure exposed if you so wish
+Grafana provides a WebUI, and can be the only part of this infrastructure exposed if you so wish. Grafana's Explore interface has advantages over the native Prometheus graph interface, and dashboards are the interface you should be using for day-to-day metrics and primary investigation of alerts
+#### Operations:
+Make sure you backup your Grafana dashboards on a regular basis. There are two approaches to this: One is to use the Grafana API to make static file copies of each dashboard, and the other is to backup the whole database of Grafana. Initially or on small applications the former might be simpler, but once Postgres is a required component of Grafana backups will likely be integrated.
 
 ### Node-exporter
 The Prometheus [Node Exporter](https://prometheus.io/docs/guides/node-exporter/) exposes a wide variety of hardware- and kernel-related metrics.
@@ -51,10 +53,9 @@ Node Exporter does not require configuration via file. Individual exporters can 
 #### Backends:
 Node Exporter does not rely on any external services.
 #### Frontend:
-Node Exporter provides a HTTP Interface that Prometheus scrapes. It does not store any information; You can observe it directly to see available metrics and read help text, but you should 
+Node Exporter provides a HTTP Interface that Prometheus scrapes. It does not store any information; You can observe it directly to see available metrics and read help text, but persistence and history is stored in prometheus. 
 
-### TOOD: kube-state-metrics
-
+### TODO: kube-state-metrics
 
 ## Configuring and Using Prometheus
 
