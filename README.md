@@ -45,7 +45,17 @@ Grafana provides a WebUI, and can be the only part of this infrastructure expose
 #### Operations:
 Make sure you backup your Grafana dashboards on a regular basis. There are two approaches to this: One is to use the Grafana API to make static file copies of each dashboard, and the other is to backup the whole database of Grafana. Initially or on small applications the former might be simpler, but once Postgres is a required component of Grafana backups will likely be integrated.
 
-### Node-exporter
+### Blackbox Exporter
+Blackbox Exporter is a prometheus tool for blackbox monitoring. While Prometheus itself monitors each instance of your application in a whitebox format, seeing internal metrics, Blackbox Exporter's job is to look at the external experience - Emulating a connection to your frontends. You should use Blackbox exporter to monitor the landing pages of your marketing sites and the load balancers in front of your pods.
+
+#### Configuration:
+  [Blackbox Exporter](https://github.com/prometheus/blackbox_exporter) is configured in two places. It has it's own config (blackbox.yaml) that configures the types of probes available, but the more important piece (the one you are likely to configure frequently) is the configuration inside of prometheus.yaml. This stanza contains the list of hosts that are queried.
+#### Backends:
+Blackbox exporter's backends are your services.
+#### Frontend:
+Blackbox Exporter HTTP Interface that Prometheus scrapes. More importantly, it provides a "/probe" endpoint that can be scraped; This is a dynamic endpoint that initiates a scrape and returns metrics for the scrape.
+
+### Node Exporter
 The Prometheus [Node Exporter](https://prometheus.io/docs/guides/node-exporter/) exposes a wide variety of hardware- and kernel-related metrics.
 
 #### Configuration:

@@ -6,7 +6,7 @@ metadata:
   labels:
     kubernetes.io/name: "Prometheus"
     app.kubernetes.io/name: blackbox-exporter
-  name: blackbox-exporterblackbox
+  name: blackbox-exporter
 spec:
   selector:
     app.kubernetes.io/name: blackbox-exporter
