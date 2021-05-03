@@ -1,6 +1,7 @@
 # Default namespace. Override with your own
 namespace: monitoring
 resources:
+  - ingress.yaml
   # Prometheus
   - prometheus-sts.yaml
   - prometheus-svc.yaml
@@ -14,7 +15,8 @@ resources:
   - grafana-svc.yaml
   # Node Exporter
   - node-exporter-ds.yaml
-  - ingress.yaml
+  # Blackbox Exporter
+  - ./blackbox-deployment.yaml
   # kube-state-metrics
   - kube-state-metrics-deployment.yaml
   - kube-state-metrics-rbac.yaml
@@ -26,6 +28,9 @@ configMapGenerator:
   - name: alertmanager
     files:
       - alertmanager.yml
+  - name: blackbox
+    files:
+      - blackbox.yaml
   - name: prometheus-rules
     files: 
       - prometheus-rules/load-average.rules.yml
