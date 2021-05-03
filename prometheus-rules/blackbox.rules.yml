@@ -1,0 +1,13 @@
+groups:
+- name: blackbox.rules
+  rules:
+    - record: blackbox:ssl_expiry_horizon:seconds
+      expr: probe_ssl_earliest_cert_expiry - now()
+    - alert: TLSCertExpiry
+      expr: blackbox:ssl_expiry_horizon:seconds < 15 * 86400  # 15 days
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        summary: "TLS Certificate for {{ $labels.instance }} Expires soon"
+        description: "One or more certificates in the certificate chain for {{ $labels.instance }} expire within 15 days. Renew them now to avoid service disruption"
