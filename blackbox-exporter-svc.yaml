@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    blackbox.io/scrape: 'true'
+  labels:
+    kubernetes.io/name: "Prometheus"
+    app.kubernetes.io/name: blackbox-exporter
+  name: blackbox-exporterblackbox
+spec:
+  selector:
+    app.kubernetes.io/name: blackbox-exporter
+  ports:
+  - name: blackbox
+    protocol: TCP
+    port: 9090
+    targetPort: 9090

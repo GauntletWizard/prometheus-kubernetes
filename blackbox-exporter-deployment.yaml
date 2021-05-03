@@ -1,15 +1,15 @@
-# Source: prometheus-blackbox-exporter/templates/deployment.yaml
-# helm.sh/chart: prometheus-blackbox-exporter-4.11.0
+# Source: blackbox-exporter/templates/deployment.yaml
+# helm.sh/chart: blackbox-exporter-4.11.0
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prometheus-blackbox-exporter
+  name: blackbox-exporter
   labels:
-    app.kubernetes.io/name: prometheus-blackbox-exporter
+    app.kubernetes.io/name: blackbox-exporter
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: prometheus-blackbox-exporter
+      app.kubernetes.io/name: blackbox-exporter
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -18,11 +18,8 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: prometheus-blackbox-exporter
-      annotations:
-        checksum/config: 320cc5537cef239c8facf79e7a3e06a2dd614a326243dc033f948e88510afca3
+        app.kubernetes.io/name: blackbox-exporter
     spec:
-      serviceAccountName: prometheus-blackbox-exporter
       restartPolicy: Always
       containers:
         - name: blackbox-exporter
@@ -55,4 +52,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: prometheus-blackbox-exporter
+            name: blackbox-exporter

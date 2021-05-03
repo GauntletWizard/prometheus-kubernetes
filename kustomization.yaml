@@ -16,7 +16,8 @@ resources:
   # Node Exporter
   - node-exporter-ds.yaml
   # Blackbox Exporter
-  - ./blackbox-deployment.yaml
+  - blackbox-exporter-deployment.yaml
+  - blackbox-exporter-svc.yaml
   # kube-state-metrics
   - kube-state-metrics-deployment.yaml
   - kube-state-metrics-rbac.yaml
@@ -28,7 +29,7 @@ configMapGenerator:
   - name: alertmanager
     files:
       - alertmanager.yml
-  - name: blackbox
+  - name: blackbox-exporter
     files:
       - blackbox.yaml
   - name: prometheus-rules
