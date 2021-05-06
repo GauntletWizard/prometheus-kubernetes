@@ -3,6 +3,14 @@ groups:
   rules:
     - record: blackbox:ssl_expiry_horizon:seconds
       expr: probe_ssl_earliest_cert_expiry - now()
+    - alert: ProbeFailure
+      expr: probe_success != 1  # 15 days
+      for: 5m
+      labels:
+        severity: page
+      annotations:
+        summary: "Probe Failed for site {{ $labels.instance }}"
+        description: "The website is down."
     - alert: TLSCertExpiry
       expr: blackbox:ssl_expiry_horizon:seconds < 15 * 86400  # 15 days
       for: 1m
