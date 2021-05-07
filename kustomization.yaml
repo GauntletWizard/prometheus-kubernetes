@@ -38,6 +38,7 @@ configMapGenerator:
   - name: prometheus-rules
     files: 
       - prometheus-rules/load-average.rules.yml
+      - prometheus-rules/blackbox.rules.yml
   - name: alertmanager-templates
     files:
       - alertmanager-templates/default.tmpl

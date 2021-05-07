@@ -2,7 +2,7 @@ groups:
 - name: blackbox.rules
   rules:
     - record: blackbox:ssl_expiry_horizon:seconds
-      expr: probe_ssl_earliest_cert_expiry - now()
+      expr: probe_ssl_earliest_cert_expiry - time()
     - alert: ProbeFailure
       expr: probe_success != 1  # 15 days
       for: 5m

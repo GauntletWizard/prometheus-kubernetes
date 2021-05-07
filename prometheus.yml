@@ -6,7 +6,7 @@
 # `labelmap` relabeling action.
 
 rule_files:
-  - "/etc/prometheus-rules/*.rules"
+  - "/etc/prometheus-rules/*.rules.yml"
 
 # Scrape config for cluster components. Our first two jobs, `kubernetes-nodes` and `kubernetes-cadvisor`, are both scraping from the kubelet. 
 # The former scrapes the `/metrics` endpoint containing kubelet metrics and statistics.
