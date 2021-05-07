@@ -26,6 +26,9 @@ configMapGenerator:
   - name: prometheus-configmap
     files:
       - prometheus.yml
+  - name: blackbox-targets
+    files:
+      - blackbox-targets.yml
   - name: alertmanager
     files:
       - alertmanager.yml
@@ -39,5 +42,6 @@ configMapGenerator:
     files:
       - alertmanager-templates/default.tmpl
       - alertmanager-templates/slack.tmpl
+# In general, adding hashes to the name suffix is a good thing. Restarting is a relatively intrusive operation for Prometheus, however, and live-reloading is supported.
 generatorOptions:
   disableNameSuffixHash: true

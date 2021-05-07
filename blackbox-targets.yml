@@ -1,0 +1,7 @@
+# This is a prometheus static targets file for "discovery" (really, just dynamic configuration of)
+# blackbox targets in your prometheus config.
+# https://prometheus.io/docs/prometheus/latest/configuration/configuration/#file_sd_config
+- targets:
+  - https://www.google.com
+#      - https://prometheus.io   # Target to probe with https.
+#      - http://example.com:8080 # Target to probe with http on port 8080.

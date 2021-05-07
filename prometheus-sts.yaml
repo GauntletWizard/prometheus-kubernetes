@@ -61,6 +61,8 @@ spec:
           mountPath: /etc/prometheus-rules
         - name: prometheus-data
           mountPath: /prometheus
+        - name: blackbox-targets
+          mountPath: /etc/blackbox-targets
       volumes:
       - name: config-volume
         configMap:
@@ -68,8 +70,9 @@ spec:
       - name: rules-volume
         configMap:
           name: prometheus-rules
-        #hostPath:
-        #  path: /etc/ssl/etcd/
+      - name: blackbox-targets
+        configMap:
+          name: blackbox-targets
       securityContext:
         fsGroup: 1001
       serviceAccountName: prometheus
