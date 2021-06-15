@@ -1,3 +1,17 @@
+# Metamonitoring for Prometheus itself. This will alert if Prometheus is unhealthy in any way. These alerts a likely too tight: Raise the, but only after understanding them.
 groups:
 - name: prometheus.rules
-  rules: []
+  rules:
+    - alert: PrometheusMissedRuleEvaluations
+      expr: rate(prometheus_rule_group_iterations_missed_total[5m]) > 0
+      for: 5m
+    - alert: PrometheusRulesSlow
+      expr: prometheus_rule_group_last_duration_seconds > (prometheus_rule_group_interval_seconds *.9)
+      for: 5m
+    - alert: Prometheus_TSDB_Failure
+      expr: SUM BY (failure) (label_replace({__name__=~"prometheus_tsdb_.*_failed_total"}, "failure", "$1", "__name__", "prometheus_tsdb_(.*)_failed_total")) > 0
+      labels:
+        severity: critical
+      annotations:
+        summary: "Prometheus has encountered a TSDB error: {{ $labels.failure }}. Check logs and for Disk Space, escalate quickly."
+        description: "This points to critical filesystem failures (running out of disk space, bad hard drive, etc)"
