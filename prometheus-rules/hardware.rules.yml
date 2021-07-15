@@ -1,0 +1,60 @@
+# This file contains hardware-level alerts. These likely belong to a different team than your Application SRE team,
+# and are thus split out.
+groups:
+- name: hardware.rules
+  rules:
+    - alert: MemoryECCCorrectableErrors
+      expr: rate(node_edac_correctable_errors_total[1h]) > 0
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        description: '{{$labels.instance}} has correctable ECC Memory Errors'
+        summary: '{{$labels.instance}} has {{ $value }} rate of ECC Memory errors per hour. Check if related to a DIMM error, and replace the DIMM or motherboard.'
+   - alert: MemoryECCUncorrectableErrors
+      expr: rate(node_edac_uncorrectable_errors_total[1h]) > 0
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        description: '{{$labels.instance}} has uncorrectable ECC Memory Errors'
+        summary: '{{$labels.instance}} has {{ $value }} rate of ECC Memory errors per hour. Check if related to a DIMM error, and replace the DIMM or motherboard.'
+    - alert: MemoryECCRowCorrectableErrors
+      expr: rate(node_edac_csrow_correctable_errors_total[1h]) > 0
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        description: '{{$labels.instance}} has correctable ECC Memory Errors at the Memory Controller level'
+        summary: '{{$labels.instance}} has {{ $value }} rate of ECC Memory errors per hour. Check if related to a DIMM error, and replace the DIMM or motherboard.'
+    - alert: MemoryECCRowUncorrectableErrors
+      expr: rate(node_edac_csrow_uncorrectable_errors_total[1h]) > 0
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        description: '{{$labels.instance}} has uncorrectable ECC Memory Errors at the Memory Controller level'
+        summary: '{{$labels.instance}} has {{ $value }} rate of ECC Memory errors per hour. Check if related to a DIMM error, and replace the DIMM or motherboard.'
+    - alert: TempAlarm
+      expr: node_hwmon_temp_alarm != 0
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        description: '{{$labels.instance}} has a temperature alarm'
+    - alert: NetworkErrors
+      expr: rate(node_network_receive_errs_total[5m]) > (1/60)
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        description: '{{$labels.instance}} has a high rate of network errors'
+        summary: '{{$labels.instance}} has {{ $value }} rate of network errors. Check the cable connection and consider replacing the cable or network card.'
+    - alert: DiskSmartHealth
+      expr: smartmon_device_smart_healthy != 1
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        description: '{{$labels.instance}} has a SMART error'
+        summary: 'Check the affected disk and consider proactively replacing'
